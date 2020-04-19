@@ -6,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 const ShowScreen = ({ navigation }) => {
     const { state } = useContext(Context)
 
-    const blogPost = state.find((blogPost) => {blogPost.id === navigation.getParam('id')})
+    const blogPost = state.find((blogPost) => blogPost.id === navigation.getParam('id'))
 
     return(
         <View>
@@ -15,16 +15,25 @@ const ShowScreen = ({ navigation }) => {
         </View>
     )
 }
-
+       
 ShowScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerRight: 
-        <TouchableOpacity onPress={() => navigation.navigate('Edit',{id: navigation.getParam('id')})}>
-            <Feather name="edit" side={35}/>
-        </TouchableOpacity> 
-    }
-}
+      headerRight: () =>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('Edit', { id: navigation.getParam('id') })
+          }
+        >
+          <Feather style={styles.iconStyle} name="edit"/>
+        </TouchableOpacity>
+    };
+  };
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    iconStyle:{
+        fontSize: 25,
+        marginRight: 10
+    }
+})
 
 export default ShowScreen
